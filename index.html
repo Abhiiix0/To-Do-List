@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Helvetica, sans-serif;
+        }
+
+        body {
+            padding: 10px;
+            
+            background-color: rgb(44, 44, 57);
+        }
+
+        h2 {
+            font-size: 55px;
+            color: rgb(81, 88, 94);
+        }
+
+        input {
+            width: 70%;
+            height: 35px;
+            border-radius: 10px;
+            padding-left: 10px;
+            margin-top: 10px;
+            background-color: rgb(29, 29, 38);
+            border: none;
+            outline: none;
+            color: rgb(113, 121, 128);
+        }
+
+        #add {
+            height: 35px;
+            background-color: transparent;
+            border: none;
+            padding-top: 5px;
+            color: blueviolet;
+            font-size: 22px;
+            margin-left: 10px;
+            font-weight: 700;
+        }
+
+        .task {
+            /* border: 2px solid black; */
+            margin-top: 50px;
+        }
+
+        .task h3 {
+            color: rgb(81, 88, 94);
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .task #list {
+            background-color: rgb(15, 15, 47);
+            width: 80%;
+            height: fit-content;
+            margin-bottom: -20px;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            color: rgb(196, 196, 196);
+            border-radius: 10px;
+            padding-left: 10px;
+            margin-bottom: 10px;
+            position: relative;
+            padding-top: 7px;
+            padding-bottom: 7px;
+            padding-right: 20%;
+        }
+
+        /* .task #list p {
+            margin-right: 80px;
+            border: 2px solid black;
+            padding: 5px 0;
+        } */
+
+        @media only screen and (max-width:450px) {
+            h2{
+                font-size: 12vw;
+            }
+            .task #list {
+                width: 75%;
+                padding-right: 20%;
+            }
+
+            #add {
+                font-size: 4.5vw;
+            }
+            #delbtn{
+                font-size: 4.5vw;
+            }
+
+        }
+
+        .task button {
+            float: right;
+            position: absolute;
+            z-index: 1;
+            right: 0;
+            margin-top: -2px;
+            background-color: transparent;
+            border: none;
+            color: rgb(252, 32, 32);
+            font-size: large;
+            font-weight: 600;
+            margin-right: 18px;
+            
+            /* border: 2px solid red; */
+        }
+
+        .checked {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>To Do List 2022</h2>
+    <input type="text" id="input" placeholder="What do you have planned?"> <button id="add">Add
+        task</button>
+    <ul class="task" id="task">
+
+        <h3>Tasks</h3>
+        <li id="list">
+        Click on text to done or undone the task 
+           <button id="delbtn">Delete</button>
+        </li>
+        <!-- <li id="list">
+            <p id="text">this is my long notes,notes for checkig the notes is fitting in contaier or not
+            </p><button id="delbtn">Delete</button>
+        </li> -->
+        <!-- <div id="list">
+            <p id="text">coding for 3 hours</p><button id="delbtn">Delete</button>
+        </div>
+        <div id="list">
+            <p id="text">This is my notes</p><button id="delbtn">Delete</button>
+        </div>
+        <div id="list">
+            <p id="text">This is my notes</p>
+            <button id="delbtn">Delete</button>
+        </div> -->
+    </ul>
+    <script>
+        var input = document.getElementById("input")
+        var addbtn = document.getElementById("add")
+        var text = document.getElementById("text")
+        let task = document.getElementById("task")
+        var list = document.getElementById('list')
+        var delbtn = task.querySelector("button")
+        // var numb = task.querySelector("div")
+
+        function addtolist() {
+            var list = document.createElement("li")
+            list.id = "list"
+            // var para = document.createElement("p")
+            // para.id = "text"
+            var btn = document.createElement("button")
+            btn.id = "delbtn"
+            btn.innerText = "Delete"
+            list.innerText = input.value;
+            task.appendChild(list);
+            // list.appendChild(para)
+            list.appendChild(btn);
+            console.log(input.value)
+            input.value = "";
+
+        }
+        addbtn.addEventListener("click", ()=>{
+            if (input.value === "") {
+                alert("Please type something");
+            } else {
+                addtolist()
+            }
+        })
+
+        var list = document.querySelector('ul');
+        list.addEventListener('click', function (ev) {
+            if (ev.target.tagName === 'LI') {
+                ev.target.classList.toggle('checked');
+            }
+        }, false);
+
+        var listss = document.querySelector("ul")
+        listss.addEventListener("click", (e) => {
+            var task = document.getElementById("task")
+            let lists = e.target.parentNode;
+            task.removeChild(lists)
+            // console.log(e.target.parentNode)
+            // console.log("remove")
+        })
+
+    </script>
+
+    <!-- // how to get length of same element? -->
+</body>
+
+</html>
